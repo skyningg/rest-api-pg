@@ -1,28 +1,7 @@
-//import express and cors
-const cors = require('cors');
-const express = require('express');
+require('dotenv').config();
 
-//create the express app with cors enabled
-const app = express();
-app.use(cors());
-app.options('*', cors());
+const server = require('./server');
+const PORT = process.env.PORT || 3300;
 
-//define port
-const port = 8085;
+        server.listen(PORT, ()=> console.log('Server is live at localhost:'));
 
-//define root controller (GET)
-app.get('/', (req, res, next) => {
-	var base = req.query.base;  //get query parametr base
-	var altura = req.query.altura;
-	console.log(base);
-	console.log(altura);
-
-	var area = (base * altura)/2;
-	var objResult = {
-		area: area
-	}
-	res.send(objResult);
-});
-app.listen(port, () =>
-	console.log('listening on port ' + port)
-);
